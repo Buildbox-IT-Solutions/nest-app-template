@@ -126,15 +126,15 @@ src
 │   │   ├── domain
 │   │   │   ├── entities
 │   │   │   ├── mappers
-│   │   │   │── value-objects
-│   │   │   └── services 
-│   │   └── infra
-│   │       ├── controllers
-│   │       ├── gateways
-│   │       │   ├── providers
-│   │       │   └── repositories/prisma
-│   │       └── facade
-│   └── account.module.ts
+│   │   │   ├── value-objects
+│   │   │   └── services
+│   │   ├── infra
+│   │   │   ├── controllers
+│   │   │   ├── gateways
+│   │   │   │   ├── providers
+│   │   │   │   └── repositories/prisma
+│   │   │   └── facade
+│   │   └── account.module.ts
 ├── app.module.ts
 └── main.ts
 ```
