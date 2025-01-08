@@ -145,30 +145,33 @@ src
 
 #### `common`
 Contém elementos reutilizáveis e compartilháveis por toda a aplicação:
+
 - **i18n**: JSONs para internacionalização (traduções).
 - **validations**: Arquivos para validação genérica, como `env.validation.ts`.
 
 #### `core`
 Agrupa partes genéricas e reutilizáveis da aplicação, seguindo a Clean Architecture:
+
 - **application**: Define contratos (gateways) que serão implementados pelas camadas de infraestrutura e consumidos pelos casos de uso.
 - **domain**:
-  - **value-objects**: Representam conceitos imutáveis e autônomos, como CPF, email, etc.
+  - - **value-objects**: Representam conceitos imutáveis e autônomos, como CPF, email, etc.
 - **infra**: Implementação de gateways e provedores genéricos, como AWS S3.
 
 #### `modules`
 Onde os módulos específicos da aplicação são definidos, cada um representando um subdomínio:
+
 - **application**:
-  - **gateways**: Contratos de comunicação externa.
-  - **use-cases**: Contêm a lógica de negócios específica do módulo.
+  - - **gateways**: Contratos de comunicação externa.
+  - - **use-cases**: Contêm a lógica de negócios específica do módulo.
 - **domain**:
-  - **entities**: Representam objetos principais do domínio com regras de negócio autônomas.
-  - **mappers**: Realizam a transformação entre modelos de dados (ex.: banco de dados para domínio).
-  - **value-objects**: Componentes imutáveis e autônomos do domínio.
-  - **services**: Serviços de domínio que encapsulam lógica complexa ou regras que afetam múltiplas entidades.
+  - - **entities**: Representam objetos principais do domínio com regras de negócio autônomas.
+  - - **mappers**: Realizam a transformação entre modelos de dados (ex.: banco de dados para domínio).
+  - - **value-objects**: Componentes imutáveis e autônomos do domínio.
+  - - **services**: Serviços de domínio que encapsulam lógica complexa ou regras que afetam múltiplas entidades.
 - **infra**:
-  - **controllers**: Pontos de entrada da aplicação.
-  - **facade**: Interface simplificada para comunicação entre módulos.
-  - **gateways**: Implementações de contratos definidos na camada de aplicação.
+  - - **controllers**: Pontos de entrada da aplicação.
+  - - **facade**: Interface simplificada para comunicação entre módulos.
+  - - **gateways**: Implementações de contratos definidos na camada de aplicação.
 
 ---
 
