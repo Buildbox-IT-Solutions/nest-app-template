@@ -1,6 +1,6 @@
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { APP_PIPE } from '@nestjs/core';
+import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
 import { validate } from '~/common/validations/env/env.validation';
 import { PrismaModule } from '~/core/infra/gateways/repositories/prisma/connection/prisma.module';
 import {
@@ -10,6 +10,8 @@ import {
   QueryResolver,
 } from 'nestjs-i18n';
 import * as path from 'path';
+
+import { ResponseInterceptor } from './common/interceptors/response.interceptor';
 
 @Module({
   imports: [
@@ -36,6 +38,10 @@ import * as path from 'path';
     {
       provide: APP_PIPE,
       useClass: ValidationPipe,
+    },
+    {
+      provide: APP_INTERCEPTOR,
+      useClass: ResponseInterceptor,
     },
   ],
 })
