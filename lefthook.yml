@@ -16,6 +16,8 @@ pre-push:
       run: pnpm lint
     test:
       run: pnpm test
+    test-e2e:
+      run: pnpm test:e2e
     commit-lint:
       run: pnpm dlx commitlint --from=HEAD~1
 commit-msg:

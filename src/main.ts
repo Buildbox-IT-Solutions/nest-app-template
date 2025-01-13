@@ -18,6 +18,7 @@ async function bootstrap() {
     .setTitle('Setup')
     .setDescription('This is a setup API description')
     .setVersion('1.0')
+    .addTag('Account', 'Endpoints for managing user accounts')
     .build();
   const documentFactory = () => SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('docs', app, documentFactory);

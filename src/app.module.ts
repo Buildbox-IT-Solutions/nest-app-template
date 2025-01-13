@@ -12,6 +12,7 @@ import {
 import * as path from 'path';
 
 import { ResponseInterceptor } from './common/interceptors/response.interceptor';
+import { AccountModule } from './modules/account/infra/account.module';
 
 @Module({
   imports: [
@@ -32,6 +33,7 @@ import { ResponseInterceptor } from './common/interceptors/response.interceptor'
       ],
     }),
     PrismaModule,
+    AccountModule,
   ],
   controllers: [],
   providers: [
