@@ -13,8 +13,4 @@ export class UserInMemoryRepository
   async findByCpf(cpf: string): Promise<UserEntity | undefined> {
     return this.entities.find((entity) => entity.cpf === cpf);
   }
-
-  clear() {
-    this.entities = [];
-  }
 }
