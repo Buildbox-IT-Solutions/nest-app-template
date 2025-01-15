@@ -14,7 +14,7 @@ permissions:
   pull-requests: write
 
 jobs:
-  generate-release:
+  ci:
     runs-on: ubuntu-latest
 
     steps:
