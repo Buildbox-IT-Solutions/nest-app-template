@@ -222,7 +222,7 @@ O **repository pattern** é um padrão que abstrai a interação com a camada de
 ## Cultura de TDD
 Todos os casos de uso, facades, entidades e serviços de domínio devem ser testados. Os testes e2e são importantes, mas os testes unitários são prioritários para garantir a qualidade das regras de negócio.
 
-- **Pasta de testes**: `src/test` para testes e2e.
+- **Pasta de testes**: `__e2e__` para testes e2e.
 - **Execução de testes**: Use `pnpm test` para rodar os testes.
 
 ---
