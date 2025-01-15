@@ -21,7 +21,9 @@
     "test:watch": "vitest",
     "test:cov": "vitest run --coverage",
     "test:debug": "vitest --inspect-brk --inspect --logHeapUsage --threads=false",
-    "test:e2e": "cross-env DATABASE_URL=file:./e2e.db npx prisma migrate dev --schema=prisma/schema.prisma && vitest run --config ./vitest.config.e2e.mjs",
+    "test:e2e:setup": "npx ts-node ./scripts/switchSchemaProvider.ts toSqlite && cross-env DATABASE_URL=file:./e2e.db npx prisma migrate dev",
+    "test:e2e:cleanup": "npx ts-node ./scripts/switchSchemaProvider.ts restore",
+    "test:e2e": "pnpm run test:e2e:setup && vitest run --config ./vitest.config.e2e.mjs && pnpm run test:e2e:cleanup",
     "migration:dev": "npx prisma migrate dev",
     "prepare": "lefthook install"
   },
