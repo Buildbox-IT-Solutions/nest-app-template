@@ -1,0 +1,15 @@
+{
+  "eslint.options": {
+    "overrideConfigFile": "./eslint.config.js"
+  },
+  "eslint.enable": true,
+  "eslint.trace.server": "verbose",
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.patterns": {
+    ".editorconfig": "lefthook*, commitlint*, eslint*, .prettierrc",
+    ".env": ".env*",
+    ".gitignore": ".git*",
+    "package.json": "tsconfig*, pnpm-lock*, .nvmrc, vite*, nest-cli*, .npmrc"
+  },
+  "editor.guides.bracketPairs": "active"
+}

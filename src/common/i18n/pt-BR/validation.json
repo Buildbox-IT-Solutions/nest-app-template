@@ -1,0 +1,7 @@
+{
+  "EMAIL_INVALID": "Email deve ser válido",
+  "CPF_INVALID": "CPF deve ser válido",
+  "PASSWORD_INVALID": "Password deve ter no mínimo 4 caracteres",
+  "NAME_INVALID": "Name deve ter no mínimo 4 caracteres",
+  "UUID_INVALID": "Deve ser um ID válido"
+}

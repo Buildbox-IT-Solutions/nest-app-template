@@ -1,0 +1,11 @@
+{
+  "HELLO_WORLD": "Olá Mundo.",
+  "ERROR": {
+    "EMAIL_EXISTS": "Usuário já existe com esse email",
+    "CPF_EXISTS": "Usuário já exsite com esse cpf",
+    "USER_NOT_FOUND": "Usuário não encontrado"
+  },
+  "SUCCESS": {
+    "DEFAULT": "Operação concluída com sucesso"
+  }
+}
