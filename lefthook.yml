@@ -1,0 +1,28 @@
+pre-commit:
+  parallel: true
+  commands:
+    type-check:
+      run: npx nx run-many --target=typecheck --all
+    format:
+      run: npx nx format:check
+    lint:
+      run: npx nx affected --target=lint --parallel
+    test:
+      run: npx nx affected --target=test --parallel
+pre-push:
+  parallel: true
+  commands:
+    type-check:
+      run: npx nx run-many --target=typecheck --all
+    format:
+      run: npx nx format:check
+    lint:
+      run: npx nx affected --target=lint --parallel
+    test:
+      run: npx nx affected --target=test --parallel
+    commit-lint:
+      run: npx commitlint --from=HEAD~1
+commit-msg:
+  commands:
+    commit-lint:
+      run: npx commitlint --edit

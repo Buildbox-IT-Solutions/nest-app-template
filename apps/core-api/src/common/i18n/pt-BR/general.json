@@ -1,0 +1,8 @@
+{
+  "ERROR": {
+    "USER_NOT_FOUND": "Usuário não encontrado"
+  },
+  "SUCCESS": {
+    "DEFAULT": "Operação concluída com sucesso"
+  }
+}

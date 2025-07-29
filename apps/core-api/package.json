@@ -1,22 +1,53 @@
 {
-  "name": "@ce-monorepo-new/core-api",
+  "name": "@ce-monorepo/core-api",
   "version": "0.0.1",
   "private": true,
+  "dependencies": {
+    "@ce-monorepo/shared": "workspace:*"
+  },
   "nx": {
     "targets": {
       "build": {
-        "executor": "nx:run-commands",
+        "executor": "@nx/esbuild:esbuild",
+        "outputs": [
+          "{options.outputPath}"
+        ],
         "options": {
-          "command": "webpack-cli build",
-          "args": [
-            "--node-env=production"
-          ]
+          "platform": "node",
+          "outputPath": "dist/apps/core-api",
+          "format": [
+            "cjs",
+            "esm"
+          ],
+          "bundle": true,
+          "main": "apps/core-api/src/main.ts",
+          "tsConfig": "apps/core-api/tsconfig.app.json",
+          "esbuildOptions": {
+            "sourcemap": true,
+            "outExtension": {
+              ".js": ".js"
+            }
+          },
+          "minify": true,
+          "target": "node18",
+          "external": []
         },
         "configurations": {
           "development": {
-            "args": [
-              "--node-env=development"
-            ]
+            "esbuildOptions": {
+              "sourcemap": true,
+              "outExtension": {
+                ".js": ".js"
+              }
+            }
+          },
+          "production": {
+            "esbuildOptions": {
+              "sourcemap": false,
+              "outExtension": {
+                ".js": ".js"
+              }
+            }
           }
         }
       },
@@ -28,15 +59,15 @@
           "build"
         ],
         "options": {
-          "buildTarget": "@ce-monorepo-new/core-api:build",
+          "buildTarget": "@ce-monorepo/core-api:build",
           "runBuildTargetDependencies": false
         },
         "configurations": {
           "development": {
-            "buildTarget": "@ce-monorepo-new/core-api:build:development"
+            "buildTarget": "@ce-monorepo/core-api:build:development"
           },
           "production": {
-            "buildTarget": "@ce-monorepo-new/core-api:build:production"
+            "buildTarget": "@ce-monorepo/core-api:build:production"
           }
         }
       },
@@ -44,7 +75,7 @@
         "dependsOn": [
           "build"
         ],
-        "command": "docker build -f apps/core-api/Dockerfile . -t ce-monorepo-new-core-api"
+        "command": "docker build -f apps/core-api/Dockerfile . -t ce-monorepo-core-api"
       }
     }
   }

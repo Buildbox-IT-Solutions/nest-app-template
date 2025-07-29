@@ -1,0 +1,8 @@
+{
+  "eslint.options": {
+    "overrideConfigFile": "./eslint.config.mjs"
+  },
+  "eslint.enable": true,
+  "eslint.trace.server": "verbose",
+  "editor.guides.bracketPairs": "active"
+}

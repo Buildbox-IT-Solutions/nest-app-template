@@ -4,10 +4,10 @@
   "files": [],
   "references": [
     {
-      "path": "./apps/core-api-e2e"
+      "path": "./apps/core-api"
     },
     {
-      "path": "./apps/core-api"
+      "path": "./libs/shared"
     }
   ]
 }

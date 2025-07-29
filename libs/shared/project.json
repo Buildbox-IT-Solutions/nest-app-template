@@ -1,0 +1,48 @@
+{
+  "name": "@ce-monorepo/shared",
+  "projectType": "library",
+  "root": "libs/shared",
+  "sourceRoot": "libs/shared/src",
+  "targets": {
+    "build": {
+      "executor": "@nx/esbuild:esbuild",
+      "outputs": ["{options.outputPath}"],
+      "options": {
+        "outputPath": "dist/libs/shared",
+        "main": "libs/shared/src/index.ts",
+        "tsConfig": "libs/shared/tsconfig.lib.json",
+        "assets": ["libs/shared/*.md"],
+        "format": ["cjs", "esm"],
+        "bundle": true,
+        "minify": true,
+        "platform": "node",
+        "target": "node18",
+        "external": []
+      }
+    },
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/shared/src/**/*.ts", "libs/shared/src/**/*.tsx"]
+      }
+    },
+    "typecheck": {
+      "executor": "@nx/js:tsc",
+      "options": {
+        "outputPath": "dist/libs/shared",
+        "main": "libs/shared/src/index.ts",
+        "tsConfig": "libs/shared/tsconfig.lib.json"
+      }
+    },
+    "test": {
+      "executor": "@nx/vite:test",
+      "outputs": ["{options.coverage.reportsDirectory}"],
+      "options": {
+        "passWithNoTests": true,
+        "reportsDirectory": "../../coverage/libs/shared"
+      }
+    }
+  },
+  "tags": []
+}
