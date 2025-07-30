@@ -64,7 +64,6 @@ export default [
       ],
     },
   },
-
   {
     files: ['**/*.ts', '**/*.tsx', '**/*.js', '**/*.jsx'],
     rules: {
@@ -81,6 +80,22 @@ export default [
           ],
         },
       ],
+    },
+  },
+  {
+    files: [
+      'vite.config.ts',
+      'vite.config.mts',
+      'vitest.config.ts',
+      'vitest.config.mjs',
+      'vitest.workspace.ts',
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: null,
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
     },
   },
 ];

@@ -16,8 +16,8 @@
         "bundle": true,
         "minify": true,
         "platform": "node",
-        "target": "node18",
-        "external": []
+        "target": "esnext",
+        "external": ["@nestjs/common", "@nestjs/core", "reflect-metadata", "rxjs"]
       }
     },
     "lint": {

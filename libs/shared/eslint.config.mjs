@@ -25,4 +25,19 @@ export default [
       },
     },
   },
+  {
+    files: [
+      'vite.config.ts',
+      'vite.config.mts',
+      'vitest.config.ts',
+      'vitest.config.mjs',
+    ],
+    languageOptions: {
+      parserOptions: {
+        project: null,
+        ecmaVersion: 'latest',
+        sourceType: 'module',
+      },
+    },
+  },
 ];

@@ -8,46 +8,19 @@
   "nx": {
     "targets": {
       "build": {
-        "executor": "@nx/esbuild:esbuild",
-        "outputs": [
-          "{options.outputPath}"
-        ],
+        "executor": "nx:run-commands",
         "options": {
-          "platform": "node",
-          "outputPath": "dist/apps/core-api",
-          "format": [
-            "cjs",
-            "esm"
+          "command": "npx webpack-cli build",
+          "args": [
+            "--node-env=production"
           ],
-          "bundle": true,
-          "main": "apps/core-api/src/main.ts",
-          "tsConfig": "apps/core-api/tsconfig.app.json",
-          "esbuildOptions": {
-            "sourcemap": true,
-            "outExtension": {
-              ".js": ".js"
-            }
-          },
-          "minify": true,
-          "target": "node18",
-          "external": []
+          "cwd": "apps/core-api"
         },
         "configurations": {
           "development": {
-            "esbuildOptions": {
-              "sourcemap": true,
-              "outExtension": {
-                ".js": ".js"
-              }
-            }
-          },
-          "production": {
-            "esbuildOptions": {
-              "sourcemap": false,
-              "outExtension": {
-                ".js": ".js"
-              }
-            }
+            "args": [
+              "--node-env=development"
+            ]
           }
         }
       },
@@ -69,6 +42,36 @@
           "production": {
             "buildTarget": "@ce-monorepo/core-api:build:production"
           }
+        }
+      },
+      "typecheck": {
+        "executor": "@nx/js:tsc",
+        "options": {
+          "outputPath": "dist/apps/core-api",
+          "main": "apps/core-api/src/main.ts",
+          "tsConfig": "apps/core-api/tsconfig.app.json"
+        }
+      },
+      "lint": {
+        "executor": "@nx/eslint:lint",
+        "outputs": [
+          "{options.outputFile}"
+        ],
+        "options": {
+          "lintFilePatterns": [
+            "apps/core-api/src/**/*.ts",
+            "apps/core-api/src/**/*.tsx"
+          ]
+        }
+      },
+      "test": {
+        "executor": "@nx/vite:test",
+        "outputs": [
+          "{options.coverage.reportsDirectory}"
+        ],
+        "options": {
+          "passWithNoTests": true,
+          "reportsDirectory": "../../coverage/apps/core-api"
         }
       },
       "docker-build": {

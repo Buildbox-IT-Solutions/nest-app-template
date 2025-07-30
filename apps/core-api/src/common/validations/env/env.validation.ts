@@ -1,5 +1,6 @@
+import { EEnvironment } from '@ce-monorepo/shared';
 import { plainToInstance } from 'class-transformer';
-import { IsOptional, IsString, validateSync } from 'class-validator';
+import { IsEnum, IsOptional, IsString, validateSync } from 'class-validator';
 
 class EnvironmentVariables {
   @IsOptional()
@@ -8,6 +9,9 @@ class EnvironmentVariables {
 
   @IsString()
   DATABASE_URL!: string;
+
+  @IsEnum(EEnvironment)
+  ENVIRONMENT!: EEnvironment;
 }
 
 export function validate(config: Record<string, unknown>) {

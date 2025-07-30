@@ -1,3 +1,4 @@
+import 'reflect-metadata';
 import { EEnvironment } from '@ce-monorepo/shared';
 import { Logger, ValidationPipe, VersioningType } from '@nestjs/common';
 import { NestFactory } from '@nestjs/core';
@@ -8,7 +9,9 @@ import { AppModule } from './app.module';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+  const globalPrefix = 'api';
 
+  app.setGlobalPrefix(globalPrefix);
   app.enableCors({
     origin:
       process.env.ENVIRONMENT === EEnvironment.PRD
