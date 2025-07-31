@@ -5,9 +5,11 @@ import {
   Injectable,
   InternalServerErrorException,
   NestInterceptor,
+  BadRequestException,
 } from '@nestjs/common';
 import { Observable, throwError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
+import { ZodError } from 'zod';
 
 @Injectable()
 export class ResponseInterceptor implements NestInterceptor {
@@ -31,6 +33,25 @@ export class ResponseInterceptor implements NestInterceptor {
       }),
       catchError((err) => {
         const duration = Date.now() - startTime;
+
+        if (err instanceof ZodError) {
+          const errors = err.issues?.map((error) => ({
+            field: error.path.join('.'),
+            message: error.message,
+            code: error.code,
+          }));
+
+          const errorResponse = {
+            statusCode: 400,
+            message: errors?.map((error) => error.message).join(', '),
+            timestamp,
+            duration: `${duration}ms`,
+            data: errors,
+          };
+
+          return throwError(() => new BadRequestException(errorResponse));
+        }
+
         const statusCode = err instanceof HttpException ? err.getStatus() : 500;
         let errorMessage = err.message;
         const errorData = err.response?.response || null;

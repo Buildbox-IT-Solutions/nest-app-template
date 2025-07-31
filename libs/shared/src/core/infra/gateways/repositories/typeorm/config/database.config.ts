@@ -10,5 +10,6 @@ export const databaseConfig: TypeOrmModuleOptions = {
   migrations: [path.join(__dirname, '../migrations/*.ts')],
   migrationsTableName: 'migrations',
   migrationsRun: true,
-  synchronize: false,
+  // TODO: Define as false when we have migration strategy working properly
+  synchronize: true,
 };

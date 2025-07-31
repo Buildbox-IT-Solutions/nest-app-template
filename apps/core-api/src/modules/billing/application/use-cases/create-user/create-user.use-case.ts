@@ -6,6 +6,7 @@ import {
 } from '@ce-monorepo/shared';
 import { BadRequestException, Injectable } from '@nestjs/common';
 
+import { CreateUserInputSchema } from './create-user.input';
 import {
   ICreateUserUseCaseInput,
   ICreateUserUseCaseOutput,
@@ -24,18 +25,19 @@ export class CreateUserUseCase extends AbstractUseCase<
   }
 
   async execute(input: ICreateUserUseCaseInput): Promise<ICreateUserUseCaseOutput> {
-    const userToCreate = new UserEntity({
-      name: input.name,
-      email: input.email,
-    });
-
-    const user = await this.usersRepository.findByEmail(input.email);
+    const validatedInput = CreateUserInputSchema.parse(input);
+    const user = await this.usersRepository.findByEmail(validatedInput.email);
 
     if (user) {
       throw new BadRequestException(
-        this.i18nProvider.t('general.USER.ALREADY_EXISTS'),
+        this.i18nProvider.t('errors.USER.ALREADY_EXISTS'),
       );
     }
+
+    const userToCreate = new UserEntity({
+      name: validatedInput.name,
+      email: validatedInput.email,
+    });
 
     await this.usersRepository.create(userToCreate);
 

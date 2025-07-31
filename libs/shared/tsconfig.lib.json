@@ -18,9 +18,7 @@
     "paths": {
       "~/*": ["./src/*"],
       "~shared/*": ["./src/*"]
-    },
-    "module": "preserve",
-    "moduleResolution": "bundler"
+    }
   },
   "include": ["src/**/*.ts", "index.ts"],
   "references": [],
