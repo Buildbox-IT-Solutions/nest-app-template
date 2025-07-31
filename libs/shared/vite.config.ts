@@ -1,10 +1,17 @@
 /// <reference types='vitest' />
+import { resolve } from 'path';
 import { defineConfig } from 'vitest/config';
 
 export default defineConfig(() => ({
   root: __dirname,
   cacheDir: '../../node_modules/.vite/libs/shared',
   plugins: [],
+  resolve: {
+    alias: {
+      '~': resolve(__dirname, './src'),
+      '~shared': resolve(__dirname, './src'),
+    },
+  },
   test: {
     watch: false,
     globals: true,

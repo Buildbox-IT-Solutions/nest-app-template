@@ -17,7 +17,16 @@
         "minify": true,
         "platform": "node",
         "target": "esnext",
-        "external": ["@nestjs/common", "@nestjs/core", "reflect-metadata", "rxjs"]
+        "external": [
+          "@nestjs/common",
+          "@nestjs/core",
+          "reflect-metadata",
+          "rxjs",
+          "class-transformer/storage"
+        ],
+        "alias": {
+          "~/*": "libs/shared/src/*"
+        }
       }
     },
     "lint": {

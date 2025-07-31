@@ -8,6 +8,8 @@ module.exports = {
   resolve: {
     alias: {
       '@ce-monorepo/shared': join(__dirname, '../../libs/shared/src/index.ts'),
+      '~': join(__dirname, './src'),
+      '~shared': join(__dirname, '../../libs/shared/src'),
     },
   },
   externals: [
@@ -15,6 +17,7 @@ module.exports = {
     '@nestjs/microservices',
     '@nestjs/websockets',
     'class-transformer/storage',
+    'reflect-metadata',
   ],
   plugins: [
     new NxAppWebpackPlugin({

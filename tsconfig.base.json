@@ -17,6 +17,8 @@
     "strict": true,
     "target": "es2022",
     "baseUrl": ".",
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
     "paths": {
       "@ce-monorepo/shared": ["libs/shared/src/index.ts"]
     }

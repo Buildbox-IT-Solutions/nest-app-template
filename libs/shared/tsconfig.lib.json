@@ -16,7 +16,8 @@
     "strictBindCallApply": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "~/*": ["./src/*"]
+      "~/*": ["./src/*"],
+      "~shared/*": ["./src/*"]
     },
     "module": "preserve",
     "moduleResolution": "bundler"

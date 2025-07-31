@@ -39,6 +39,7 @@ async function bootstrap() {
     .setDescription('This is a setup API description')
     .setVersion('1.0')
     .addTag('Auth', 'Endpoints for managing authentication')
+    .addTag('Users Management', 'Endpoints for managing users')
     .addBearerAuth(
       {
         type: 'http',

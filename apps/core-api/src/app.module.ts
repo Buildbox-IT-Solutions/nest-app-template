@@ -1,4 +1,5 @@
 import { ResponseInterceptor } from '@ce-monorepo/shared';
+import { databaseConfig } from '@ce-monorepo/shared';
 import { Module, ValidationPipe } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { APP_INTERCEPTOR, APP_PIPE } from '@nestjs/core';
@@ -12,9 +13,8 @@ import {
 } from 'nestjs-i18n';
 import * as path from 'path';
 
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
 import { validate } from './common/validations/env/env.validation';
+import { UsersManagementModule } from './modules/billing/infra/users-management.module';
 
 @Module({
   imports: [
@@ -35,13 +35,10 @@ import { validate } from './common/validations/env/env.validation';
         new HeaderResolver(['x-lang']),
       ],
     }),
-    TypeOrmModule.forRoot({
-      type: 'mysql',
-      url: process.env.DATABASE_URL,
-      entities: [],
-    }),
+    TypeOrmModule.forRoot(databaseConfig),
+    UsersManagementModule,
   ],
-  controllers: [AppController],
+  controllers: [],
   providers: [
     {
       provide: APP_PIPE,
@@ -51,7 +48,6 @@ import { validate } from './common/validations/env/env.validation';
       provide: APP_INTERCEPTOR,
       useClass: ResponseInterceptor,
     },
-    AppService,
   ],
 })
 export class AppModule {}
