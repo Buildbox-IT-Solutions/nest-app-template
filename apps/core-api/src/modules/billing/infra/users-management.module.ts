@@ -9,6 +9,7 @@ import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
 
 import { CreateUserUseCase } from '../application/use-cases/create-user/create-user.use-case';
+import { ListUsersUseCase } from '../application/use-cases/list-users/list-users.use-case';
 import { UserManagementController } from './controllers/users-management/users-management.controller';
 
 @Module({
@@ -24,6 +25,7 @@ import { UserManagementController } from './controllers/users-management/users-m
       useClass: TypeORMUsersRepository,
     },
     CreateUserUseCase,
+    ListUsersUseCase,
   ],
 })
 export class UsersManagementModule {}

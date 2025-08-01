@@ -2,8 +2,8 @@ import { UserEntity } from '../entities/user/user.entity';
 import { IUserEntityProps } from '../entities/user/user.entity.interface';
 import { BaseMapper } from './base.mapper';
 
-export class UserMapper extends BaseMapper<UserEntity, IUserEntityProps> {
-  toDTO(entity: UserEntity): IUserEntityProps {
+export abstract class UserMapper extends BaseMapper<UserEntity, IUserEntityProps> {
+  static toDTO(entity: UserEntity): IUserEntityProps {
     return {
       id: entity.id.value,
       name: entity.name,
@@ -14,7 +14,7 @@ export class UserMapper extends BaseMapper<UserEntity, IUserEntityProps> {
     };
   }
 
-  toEntity(dto: IUserEntityProps): UserEntity {
+  static toEntity(dto: IUserEntityProps): UserEntity {
     return new UserEntity(dto);
   }
 }

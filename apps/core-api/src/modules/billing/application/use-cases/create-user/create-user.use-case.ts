@@ -4,7 +4,12 @@ import {
   AbstractUseCase,
   UserEntity,
 } from '@ce-monorepo/shared';
-import { BadRequestException, Injectable } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
+import { isLeft } from 'fp-ts/lib/Either';
 
 import { CreateUserInputSchema } from './create-user.input';
 import {
@@ -26,9 +31,18 @@ export class CreateUserUseCase extends AbstractUseCase<
 
   async execute(input: ICreateUserUseCaseInput): Promise<ICreateUserUseCaseOutput> {
     const validatedInput = CreateUserInputSchema.parse(input);
-    const user = await this.usersRepository.findByEmail(validatedInput.email);
 
-    if (user) {
+    const existingUserResult = await this.usersRepository.findByEmail(
+      validatedInput.email,
+    );
+
+    if (isLeft(existingUserResult)) {
+      throw new InternalServerErrorException(
+        this.i18nProvider.t('errors.REPOSITORY.FAILED_TO_FIND_USER'),
+      );
+    }
+
+    if (existingUserResult.right) {
       throw new BadRequestException(
         this.i18nProvider.t('errors.USER.ALREADY_EXISTS'),
       );
@@ -39,7 +53,13 @@ export class CreateUserUseCase extends AbstractUseCase<
       email: validatedInput.email,
     });
 
-    await this.usersRepository.create(userToCreate);
+    const createUserResult = await this.usersRepository.create(userToCreate);
+
+    if (isLeft(createUserResult)) {
+      throw new InternalServerErrorException(
+        this.i18nProvider.t('errors.REPOSITORY.FAILED_TO_CREATE_USER'),
+      );
+    }
 
     return {
       email: userToCreate.email.value,

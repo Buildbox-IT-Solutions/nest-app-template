@@ -1,5 +1,12 @@
 {
   "USER": {
     "ALREADY_EXISTS": "Usuário já existe"
+  },
+  "REPOSITORY": {
+    "FAILED_TO_CREATE_USER": "Erro ao criar usuário",
+    "FAILED_TO_FIND_USER": "Erro ao buscar usuário",
+    "FAILED_TO_FETCH_USERS": "Erro ao buscar usuários",
+    "USER_NOT_FOUND": "Usuário não encontrado",
+    "DATABASE_ERROR": "Erro de banco de dados"
   }
 }

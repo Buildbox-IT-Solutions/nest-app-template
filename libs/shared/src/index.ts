@@ -9,6 +9,7 @@ export * from './core/domain/entities/base/base.entity';
 export * from './core/domain/entities/user/user.entity';
 export * from './core/domain/value-objects/email/email.value-object';
 export * from './core/domain/value-objects/id/id.value-object';
+export * from './core/domain/mappers/user.mapper';
 
 // core/application/gateways/providers
 export * from './core/application/gateways/providers/i18n/i18n.provider.abstract';
@@ -23,6 +24,6 @@ export * from './core/application/gateways/repositories/users/users.repository.a
 export * from './core/infra/gateways/providers/i18n/i18n.provider';
 
 // core/infra/gateways/repositories
-export * from './core/infra/gateways/repositories/typeorm/models/user.model';
-export * from './core/infra/gateways/repositories/typeorm/users.repository';
-export * from './core/infra/gateways/repositories/typeorm/config/database.config';
+export * from './core/infra/gateways/repositories/typeorm/_models/user.model';
+export * from './core/infra/gateways/repositories/typeorm/users/users.repository';
+export * from './core/infra/gateways/repositories/typeorm/_config/database.config';

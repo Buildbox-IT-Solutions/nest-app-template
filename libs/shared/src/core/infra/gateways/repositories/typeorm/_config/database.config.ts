@@ -1,7 +1,7 @@
 import { TypeOrmModuleOptions } from '@nestjs/typeorm';
 import * as path from 'path';
 
-import { TypeORMUserModel } from '../models/user.model';
+import { TypeORMUserModel } from '../_models/user.model';
 
 export const databaseConfig: TypeOrmModuleOptions = {
   type: 'mysql',
