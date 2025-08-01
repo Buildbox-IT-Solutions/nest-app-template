@@ -1,6 +1,6 @@
-import { UserEntity } from '../entities/user/user.entity';
-import { IUserEntityProps } from '../entities/user/user.entity.interface';
-import { BaseMapper } from './base.mapper';
+import { UserEntity } from '../../entities/user/user.entity';
+import { IUserEntityProps } from '../../entities/user/user.entity.interface';
+import { BaseMapper } from '../base/base.mapper.abstract';
 
 export abstract class UserMapper extends BaseMapper<UserEntity, IUserEntityProps> {
   static toDTO(entity: UserEntity): IUserEntityProps {
@@ -10,7 +10,7 @@ export abstract class UserMapper extends BaseMapper<UserEntity, IUserEntityProps
       email: entity.email.value,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
-      deletedAt: entity.deletedAt || undefined,
+      deletedAt: entity.deletedAt,
     };
   }
 

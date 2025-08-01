@@ -61,4 +61,15 @@ describe('BaseEntity', () => {
       expect(baseEntity.deletedAt).toBeNull();
     });
   });
+
+  describe('changeUpdatedAt', () => {
+    it('should change updatedAt correctly', () => {
+      const before = baseEntity.updatedAt;
+      baseEntity.changeUpdatedAt();
+      expect(baseEntity.updatedAt.getTime()).toBeGreaterThanOrEqual(
+        before.getTime(),
+      );
+      expect(baseEntity.updatedAt).toBeInstanceOf(Date);
+    });
+  });
 });

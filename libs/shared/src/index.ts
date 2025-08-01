@@ -9,7 +9,7 @@ export * from './core/domain/entities/base/base.entity';
 export * from './core/domain/entities/user/user.entity';
 export * from './core/domain/value-objects/email/email.value-object';
 export * from './core/domain/value-objects/id/id.value-object';
-export * from './core/domain/mappers/user.mapper';
+export * from './core/domain/mappers/user/user.mapper';
 
 // core/application/gateways/providers
 export * from './core/application/gateways/providers/i18n/i18n.provider.abstract';

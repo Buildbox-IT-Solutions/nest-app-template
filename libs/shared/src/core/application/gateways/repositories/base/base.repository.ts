@@ -10,7 +10,7 @@ export abstract class BaseRepository {
   protected handleError(error: any): never {
     this.logger.error(`Database error:`, error);
 
-    if (error.code) {
+    if (error?.code) {
       throw new Error(`Database error: ${error.message}`);
     }
 

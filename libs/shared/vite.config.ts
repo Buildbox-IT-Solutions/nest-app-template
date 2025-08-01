@@ -21,7 +21,7 @@ export default defineConfig(() => ({
     coverage: {
       reportsDirectory: './test-output/vitest/coverage',
       provider: 'v8' as const,
-      include: ['src/modules/**/*.ts', 'src/common/**/*.ts'],
+      include: ['src/core/**/*.ts', 'src/common/**/*.ts', 'src/modules/**/*.ts'],
       exclude: [
         '**/*.facade.ts',
         '**/*.decorator.ts',
@@ -35,9 +35,11 @@ export default defineConfig(() => ({
         '**/*.dto.ts',
         '**/*.module.ts',
         '**/*.module.ts',
+        '**/*.input.ts',
         'src/core/infra/**/*.ts',
         'src/common/utils/**/*.ts',
         'src/modules/**/infra/**/*.ts',
+        '**/*.errors.ts',
       ],
     },
   },

@@ -1,7 +1,7 @@
 import { UserEntity } from '@ce-monorepo/shared';
 import { IUserEntityProps } from '@ce-monorepo/shared/src/core/domain/entities/user/user.entity.interface';
 
-import { BaseViewMapper } from './base-view.mapper';
+import { BaseViewMapper } from '../base/base-view.mapper.abstract';
 
 export abstract class UserViewMapper extends BaseViewMapper<
   UserEntity,

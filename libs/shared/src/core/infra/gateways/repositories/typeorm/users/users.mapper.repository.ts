@@ -1,4 +1,4 @@
-import { BaseMapperRepository } from '~shared/core/application/gateways/repositories/base/base.mapper.repository';
+import { BaseMapperRepository } from '~shared/core/application/gateways/repositories/base/base.mapper.repository.abstract';
 import { UserEntity } from '~shared/core/domain/entities/user/user.entity';
 
 import { TypeORMUserModel } from '../_models/user.model';
@@ -29,7 +29,7 @@ export abstract class UsersMapperRepository extends BaseMapperRepository<
       email: entity.email.value,
       createdAt: entity.createdAt,
       updatedAt: entity.updatedAt,
-      deletedAt: entity.deletedAt || undefined,
+      deletedAt: entity.deletedAt,
     };
   }
 

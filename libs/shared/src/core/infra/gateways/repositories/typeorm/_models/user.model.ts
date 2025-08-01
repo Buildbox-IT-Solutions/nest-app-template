@@ -24,5 +24,5 @@ export class TypeORMUserModel {
   updatedAt!: Date;
 
   @Column({ type: 'timestamp', nullable: true })
-  deletedAt?: Date;
+  deletedAt?: Date | null;
 }
