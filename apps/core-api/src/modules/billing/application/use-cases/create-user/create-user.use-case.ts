@@ -9,7 +9,7 @@ import {
   Injectable,
   InternalServerErrorException,
 } from '@nestjs/common';
-import { isLeft } from 'fp-ts/lib/Either';
+import * as Either from 'effect/Either';
 
 import { CreateUserInputSchema } from './create-user.input';
 import {
@@ -36,7 +36,7 @@ export class CreateUserUseCase extends AbstractUseCase<
       validatedInput.email,
     );
 
-    if (isLeft(existingUserResult)) {
+    if (Either.isLeft(existingUserResult)) {
       throw new InternalServerErrorException(
         this.i18nProvider.t('errors.REPOSITORY.FAILED_TO_FIND_USER'),
       );
@@ -55,7 +55,7 @@ export class CreateUserUseCase extends AbstractUseCase<
 
     const createUserResult = await this.usersRepository.create(userToCreate);
 
-    if (isLeft(createUserResult)) {
+    if (Either.isLeft(createUserResult)) {
       throw new InternalServerErrorException(
         this.i18nProvider.t('errors.REPOSITORY.FAILED_TO_CREATE_USER'),
       );

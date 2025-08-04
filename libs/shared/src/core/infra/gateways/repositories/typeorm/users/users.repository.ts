@@ -8,7 +8,7 @@ import {
   UserRepositoryFailure,
 } from '~shared/core/application/gateways/repositories/users/users.repository.errors';
 import { UserEntity } from '~shared/core/domain/entities/user/user.entity';
-import { Either, left, right } from 'fp-ts/lib/Either';
+import * as Either from 'effect/Either';
 import { Repository } from 'typeorm';
 
 import { TypeORMUserModel } from '../_models/user.model';
@@ -28,53 +28,53 @@ export class TypeORMUsersRepository
 
   async create(
     user: UserEntity,
-  ): Promise<Either<UserRepositoryFailure, UserEntity>> {
+  ): Promise<Either.Either<UserEntity, UserRepositoryFailure>> {
     try {
       const userModel = this.userModel.create(UsersMapperRepository.toModel(user));
       const savedUser = await this.userModel.save(userModel);
 
-      return right(UsersMapperRepository.toEntity(savedUser));
+      return Either.right(UsersMapperRepository.toEntity(savedUser));
     } catch {
-      return left(new UserCreationError());
+      return Either.left(new UserCreationError());
     }
   }
 
-  async findAll(): Promise<Either<UserRepositoryFailure, UserEntity[]>> {
+  async findAll(): Promise<Either.Either<UserEntity[], UserRepositoryFailure>> {
     try {
       const users = await this.userModel.find();
 
-      return right(UsersMapperRepository.toEntityArray(users));
+      return Either.right(UsersMapperRepository.toEntityArray(users));
     } catch {
-      return left(new UserRepositoryError());
+      return Either.left(new UserRepositoryError());
     }
   }
 
   async findByEmail(
     email: string,
-  ): Promise<Either<UserRepositoryFailure, UserEntity | null>> {
+  ): Promise<Either.Either<UserEntity | null, UserRepositoryFailure>> {
     try {
       const user = await this.userModel.findOne({ where: { email } });
 
       if (!user) {
-        return right(null);
+        return Either.right(null);
       }
 
-      return right(UsersMapperRepository.toEntity(user));
+      return Either.right(UsersMapperRepository.toEntity(user));
     } catch {
-      return left(new UserRepositoryError());
+      return Either.left(new UserRepositoryError());
     }
   }
 
   async createMany(
     users: UserEntity[],
-  ): Promise<Either<UserRepositoryFailure, UserEntity[]>> {
+  ): Promise<Either.Either<UserEntity[], UserRepositoryFailure>> {
     try {
       const userModels = UsersMapperRepository.toModelArray(users);
       const savedUsers = await this.userModel.save(userModels);
 
-      return right(UsersMapperRepository.toEntityArray(savedUsers));
+      return Either.right(UsersMapperRepository.toEntityArray(savedUsers));
     } catch {
-      return left(new UserCreationError());
+      return Either.left(new UserCreationError());
     }
   }
 }

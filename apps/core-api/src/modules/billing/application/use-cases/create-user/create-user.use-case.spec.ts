@@ -4,7 +4,7 @@ import {
   UserEntity,
 } from '@ce-monorepo/shared';
 import { BadRequestException, InternalServerErrorException } from '@nestjs/common';
-import { left, right } from 'fp-ts/lib/Either';
+import * as Either from 'effect/Either';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 
 import { CreateUserUseCase } from './create-user.use-case';
@@ -35,9 +35,11 @@ describe('CreateUserUseCase', () => {
     };
 
     it('should create user successfully', async () => {
-      vi.spyOn(mockUsersRepository, 'findByEmail').mockResolvedValue(right(null));
+      vi.spyOn(mockUsersRepository, 'findByEmail').mockResolvedValue(
+        Either.right(null),
+      );
       vi.spyOn(mockUsersRepository, 'create').mockResolvedValue(
-        right(new UserEntity(validInput)),
+        Either.right(new UserEntity(validInput)),
       );
 
       const result = await useCase.execute(validInput);
@@ -57,7 +59,7 @@ describe('CreateUserUseCase', () => {
     it('should throw BadRequestException when user already exists', async () => {
       const existingUser = new UserEntity(validInput);
       vi.spyOn(mockUsersRepository, 'findByEmail').mockResolvedValue(
-        right(existingUser),
+        Either.right(existingUser),
       );
 
       await expect(useCase.execute(validInput)).rejects.toThrow(BadRequestException);
@@ -66,7 +68,7 @@ describe('CreateUserUseCase', () => {
 
     it('should throw InternalServerErrorException when findByEmail fails', async () => {
       vi.spyOn(mockUsersRepository, 'findByEmail').mockResolvedValue(
-        left(new Error('DB Error')),
+        Either.left(new Error('DB Error')),
       );
 
       await expect(useCase.execute(validInput)).rejects.toThrow(
@@ -78,9 +80,11 @@ describe('CreateUserUseCase', () => {
     });
 
     it('should throw InternalServerErrorException when create fails', async () => {
-      vi.spyOn(mockUsersRepository, 'findByEmail').mockResolvedValue(right(null));
+      vi.spyOn(mockUsersRepository, 'findByEmail').mockResolvedValue(
+        Either.right(null),
+      );
       vi.spyOn(mockUsersRepository, 'create').mockResolvedValue(
-        left(new Error('DB Error')),
+        Either.left(new Error('DB Error')),
       );
 
       await expect(useCase.execute(validInput)).rejects.toThrow(

@@ -5,7 +5,7 @@ import {
   UserMapper,
 } from '@ce-monorepo/shared';
 import { Injectable, InternalServerErrorException } from '@nestjs/common';
-import { isLeft } from 'fp-ts/lib/Either';
+import * as Either from 'effect/Either';
 
 import { IListUsersUseCaseOutput } from './list-users.interface';
 
@@ -24,7 +24,7 @@ export class ListUsersUseCase extends AbstractUseCase<
   async execute(): Promise<IListUsersUseCaseOutput> {
     const usersResult = await this.usersRepository.findAll();
 
-    if (isLeft(usersResult)) {
+    if (Either.isLeft(usersResult)) {
       throw new InternalServerErrorException(
         this.i18nProvider.t('errors.REPOSITORY.FAILED_TO_FETCH_USERS'),
       );

@@ -5,7 +5,7 @@ import {
   UserMapper,
 } from '@ce-monorepo/shared';
 import { InternalServerErrorException } from '@nestjs/common';
-import { left, right } from 'fp-ts/lib/Either';
+import * as Either from 'effect/Either';
 import { describe, expect, it, beforeEach, vi } from 'vitest';
 
 import { ListUsersUseCase } from './list-users.use-case';
@@ -36,7 +36,9 @@ describe('ListUsersUseCase', () => {
         new UserEntity({ name: 'Jane Smith', email: 'jane@example.com' }),
       ];
 
-      vi.spyOn(mockUsersRepository, 'findAll').mockResolvedValue(right(users));
+      vi.spyOn(mockUsersRepository, 'findAll').mockResolvedValue(
+        Either.right(users),
+      );
 
       const result = await useCase.execute();
 
@@ -48,7 +50,7 @@ describe('ListUsersUseCase', () => {
     });
 
     it('should return empty array when no users exist', async () => {
-      vi.spyOn(mockUsersRepository, 'findAll').mockResolvedValue(right([]));
+      vi.spyOn(mockUsersRepository, 'findAll').mockResolvedValue(Either.right([]));
 
       const result = await useCase.execute();
 
@@ -58,7 +60,7 @@ describe('ListUsersUseCase', () => {
 
     it('should throw InternalServerErrorException when findAll fails', async () => {
       vi.spyOn(mockUsersRepository, 'findAll').mockResolvedValue(
-        left(new Error('DB Error')),
+        Either.left(new Error('DB Error')),
       );
 
       await expect(useCase.execute()).rejects.toThrow(InternalServerErrorException);
